@@ -13,5 +13,5 @@ For a treat, check out the UML diagram included in the folder to see the complex
 
 When user chooses an aircraft the system calls an abstract aircraft factory that, in turn, calls either a helicopter builder pattern or an airplane builder. The two mentioned builders need and engine tho… That’s when they outsource this task to an EngineFactory. (AbstractAircraftEngine -> HelicopterBuilder/AirplaneBuilder -> EngineFactory).
 
-Both helicopter and airplane objects inherit from the aircraft class. This aircraft class uses multiple factory patterns in order to so its job (on/off, functional/nonfunctional, landed/not landed, landing/ not landing).
+Both helicopter and airplane objects inherit from the aircraft class. This aircraft class uses multiple state design patterns in order to do its job (on/off, functional/nonfunctional, landed/not landed, landing/ not landing). Each state used in the state design patterns is also considered a singlton object in order to avaoid unecessary repetition.
 
