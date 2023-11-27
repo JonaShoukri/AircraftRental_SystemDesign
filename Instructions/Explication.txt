@@ -1,0 +1,11 @@
+airplane is a complexe object. imagine and add  helicopter as another complex object.
+create 3 model for each. use factory to order complex object from builderS which gather 
+small objects from other factories.
+Abstract Factory -> Builders -> Factories.
+
+how about state design pattern? can integrate it in this project?
+or observer design pattern?..
+
+be creative !
+
+
