@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public abstract class Aircraft {
     String ID;
     double altitude;
@@ -7,6 +9,7 @@ public abstract class Aircraft {
     StateFunctional functional;
     StateLanded landed;
     StateLanding landing;
+    ArrayList<User> users;
 
     public Aircraft(Type type){
         this.ID = IdGenerator.generateID();
@@ -16,6 +19,7 @@ public abstract class Aircraft {
         this.functional = StateFunctional_True.Instance();
         this.landed = StateLanded_True.Instance();
         this.landing = StateLanding_False.Instance();
+        this.users = new ArrayList<>();
     }
 
     public String getID(){
@@ -48,6 +52,10 @@ public abstract class Aircraft {
 
     public void setVariant(Variants variant){
         this.variant = variant;
+    }
+
+    public void addUser(User user){
+        this.users.add(user);
     }
 
     public String toString(){
@@ -85,6 +93,9 @@ public abstract class Aircraft {
             System.out.println("Turning off...");
             this.on.change(this);
         }
+        if (this.isAvailable()){
+            notifyUsers();
+        }
     }
 
     public void takeOff(){
@@ -113,6 +124,9 @@ public abstract class Aircraft {
             this.landed.change(this);
             this.landing.change(this);
             this.setAltitude(0);
+            if (this.isAvailable()){
+                notifyUsers();
+            }
         }
     }
 
@@ -169,5 +183,21 @@ public abstract class Aircraft {
             System.out.println("Fixing...");
             this.functional.change(this);
         }
+        if (this.isAvailable()){
+            notifyUsers();
+        }
+    }
+
+    private void notifyUsers(){
+        for (User user : this.users){
+            System.out.println("Hey User" + user.ID + ", your " + this.variant + "aircraft is now available!");
+        }
+    }
+
+    private boolean isAvailable() {
+        if (landed.get() && !on.get() && functional.get() && !landing.get()){
+            return true;
+        }
+        return false;
     }
 }

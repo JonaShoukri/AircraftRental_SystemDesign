@@ -3,6 +3,5 @@ public class Main {
         do {
             AircraftSimulator.run();
         } while (AircraftSimulator.exitApp == false);
-
     }
 }
